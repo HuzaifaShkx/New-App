@@ -1,9 +1,22 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:device_preview_screenshot/device_preview_screenshot.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'View/splash_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(
+    enabled: !kReleaseMode,
+    builder: (context) => MyApp(), // Wrap your app
+    tools: [
+        ...DevicePreview.defaultTools,
+        const DevicePreviewScreenshot(multipleScreenshots: true,),
+      ],
+  )
+   // const MyApp()
+   );
 }
 
 class MyApp extends StatelessWidget {
